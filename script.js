@@ -80,12 +80,22 @@
     return card ? card.getBoundingClientRect().width + gap : 360;
   }
 
+  function scrollTestimonials(direction) {
+    if (!testimonialTrack) return;
+    const maxScroll = testimonialTrack.scrollWidth - testimonialTrack.clientWidth;
+    const nextPosition = testimonialTrack.scrollLeft + direction * getCardScrollAmount();
+    testimonialTrack.scrollTo({
+      left: Math.max(0, Math.min(nextPosition, maxScroll)),
+      behavior: 'smooth',
+    });
+  }
+
   prevButton?.addEventListener('click', () => {
-    testimonialTrack?.scrollBy({ left: -getCardScrollAmount(), behavior: 'smooth' });
+    scrollTestimonials(-1);
   });
 
   nextButton?.addEventListener('click', () => {
-    testimonialTrack?.scrollBy({ left: getCardScrollAmount(), behavior: 'smooth' });
+    scrollTestimonials(1);
   });
 
   const revealElements = document.querySelectorAll('.reveal, .reveal-group');
