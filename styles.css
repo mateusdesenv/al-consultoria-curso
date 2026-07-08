@@ -2236,3 +2236,59 @@ body.menu-open .mobile-menu {
     bottom: 98px;
   }
 }
+
+
+/* Ajustes finais do cliente — web hero, hierarquia sem eyebrow e textos */
+.section-heading.no-eyebrow {
+  margin-top: 0;
+}
+
+.mentor-section .section-copy p strong,
+.faq-answer strong {
+  color: var(--color-text);
+  font-weight: 850;
+}
+
+@media (min-width: 901px) {
+  .portrait-badge {
+    left: 18px;
+    bottom: 24px;
+    max-width: 245px;
+  }
+
+  .floating-note {
+    right: 18px;
+    bottom: 112px;
+    width: 230px;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .portrait-badge {
+    left: 14px;
+    bottom: 22px;
+  }
+
+  .floating-note {
+    right: 14px;
+    bottom: 102px;
+    width: 218px;
+  }
+}
+
+@media (max-height: 820px) and (min-width: 901px) {
+  .portrait-badge {
+    bottom: 18px;
+    padding: 14px 16px;
+  }
+
+  .floating-note {
+    bottom: 86px;
+    padding: 14px 16px;
+  }
+
+  .portrait-badge strong,
+  .floating-note strong {
+    font-size: 0.9rem;
+  }
+}
