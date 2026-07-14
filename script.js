@@ -7,6 +7,7 @@
   const closeTriggers = document.querySelectorAll('[data-menu-close]');
   const mobileLinks = document.querySelectorAll('.mobile-nav a');
   const checkoutAnchors = document.querySelectorAll('[data-checkout-link]');
+  const lotCards = Array.from(document.querySelectorAll('[data-lot-card]'));
 
   checkoutAnchors.forEach((anchor) => {
     anchor.setAttribute('href', checkoutLink);
@@ -17,6 +18,36 @@
       anchor.setAttribute('aria-label', 'Garantir minha vaga no workshop LinkedIn Estrategico');
     }
   });
+
+  function parseLocalDate(dateValue) {
+    const [year, month, day] = dateValue.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  }
+
+  function getCurrentLot(cards, currentDate = new Date()) {
+    const today = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    const ranges = cards.map((card) => ({
+      card,
+      start: parseLocalDate(card.dataset.lotStart),
+      end: parseLocalDate(card.dataset.lotEnd),
+    }));
+
+    const activeRange = ranges.find(({ start, end }) => today >= start && today <= end);
+    return activeRange?.card ?? ranges.at(-1)?.card ?? null;
+  }
+
+  function syncCurrentLot() {
+    if (!lotCards.length) return;
+
+    const currentLot = getCurrentLot(lotCards);
+    lotCards.forEach((card) => {
+      const isCurrent = card === currentLot;
+      card.classList.toggle('active', isCurrent);
+      card.setAttribute('aria-current', isCurrent ? 'true' : 'false');
+    });
+  }
+
+  syncCurrentLot();
 
   function openMenu() {
     body.classList.add('menu-open');
