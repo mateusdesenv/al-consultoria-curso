@@ -1,10 +1,22 @@
 (function () {
+  const checkoutLink = 'https://pay.kiwify.com.br/4mlsCVE';
   const body = document.body;
   const header = document.getElementById('siteHeader');
   const menuToggle = document.querySelector('.menu-toggle');
   const mobileMenu = document.getElementById('mobileMenu');
   const closeTriggers = document.querySelectorAll('[data-menu-close]');
   const mobileLinks = document.querySelectorAll('.mobile-nav a');
+  const checkoutAnchors = document.querySelectorAll('[data-checkout-link]');
+
+  checkoutAnchors.forEach((anchor) => {
+    anchor.setAttribute('href', checkoutLink);
+    anchor.setAttribute('target', '_blank');
+    anchor.setAttribute('rel', 'noopener noreferrer');
+
+    if (!anchor.hasAttribute('aria-label')) {
+      anchor.setAttribute('aria-label', 'Garantir minha vaga no workshop LinkedIn Estrategico');
+    }
+  });
 
   function openMenu() {
     body.classList.add('menu-open');
